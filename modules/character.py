@@ -1,4 +1,5 @@
 import pygame
+from .main import get_platform_group
 
 
 class Radish(pygame.sprite.Sprite):
@@ -45,8 +46,8 @@ class Radish(pygame.sprite.Sprite):
         pass
 
     def fall(self):
-        if pygame.sprite.spritecollideany(self, self.platform_group) is None:
-            self.rect.y += self.speed
+        if pygame.sprite.spritecollideany(self, get_platform_group()) is None:
+            self.rect.y += self.gravity
 
     def update(self, *args):
         if args:

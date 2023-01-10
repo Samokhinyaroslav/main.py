@@ -29,13 +29,13 @@ def game(screen, background_game_img):
         clock.tick(FPS)
         pygame.display.flip()
 
-def get_group():
+def get_platform_group():
     return platform_group
 
 
 if __name__ == '__main__':
     pygame.init()
-    background_game_img = pygame.image.load("data/background.png")
+    background_game_img = pygame.image.load("../data/background.png")
     size = width, height = 700, 400
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     tiles_group = pygame.sprite.Group()
     platform_group = pygame.sprite.Group()
     player_group = pygame.sprite.Group()
-    lvl = Level('data/lvl.txt')
+    lvl = Level('../data/lvl.txt')
     player, level_x, level_y = lvl.generate_level(tile_module, character_module, player_group, tiles_group, platform_group, all_sprites)
     camera = Camera()
     game(screen, background_game_img)
