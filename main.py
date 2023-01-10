@@ -29,6 +29,9 @@ def game(screen, background_game_img):
         clock.tick(FPS)
         pygame.display.flip()
 
+def get_group():
+    return platform_group
+
 
 if __name__ == '__main__':
     pygame.init()
@@ -39,10 +42,9 @@ if __name__ == '__main__':
     pygame.display.set_caption('Редиска')
     all_sprites = pygame.sprite.Group()
     tiles_group = pygame.sprite.Group()
-    walls_group = pygame.sprite.Group()
-    empty_tile_group = pygame.sprite.Group()
+    platform_group = pygame.sprite.Group()
     player_group = pygame.sprite.Group()
     lvl = Level('data/lvl.txt')
-    player, level_x, level_y = lvl.generate_level(tile_module, character_module, player_group, tiles_group, walls_group, empty_tile_group, all_sprites)
+    player, level_x, level_y = lvl.generate_level(tile_module, character_module, player_group, tiles_group, platform_group, all_sprites)
     camera = Camera()
     game(screen, background_game_img)

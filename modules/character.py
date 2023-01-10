@@ -2,6 +2,13 @@ import pygame
 
 
 class Radish(pygame.sprite.Sprite):
+    is_alive = True
+    is_jump = False
+    power_jump = 20
+    gravity = 1
+    coins = 0
+    is_in_house = False
+
     def __init__(self, image, pos, size, speed, *group):
         super().__init__(*group)
         self.image = image
@@ -19,10 +26,32 @@ class Radish(pygame.sprite.Sprite):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
             self.rect.y += self.speed
 
+    def is_alive(self):
+        pass
+
+    def die(self):
+        pass
+
+    def jump(self):
+        pass
+
+    def stop_jump(self):
+        pass
+
+    def pick_up_coins(self, группа_монет):
+        pass
+
+    def go_in_house(self, группа_зданий):
+        pass
+
+    def fall(self):
+        if pygame.sprite.spritecollideany(self, self.platform_group) is None:
+            self.rect.y += self.speed
 
     def update(self, *args):
         if args:
             self.walk(args[0])
+
 
 
 class Grater(pygame.sprite.Sprite):
