@@ -1,12 +1,12 @@
 import pygame
-from main import get_platform_group
+
 
 
 class Radish(pygame.sprite.Sprite):
     is_alive = True
-    is_jump = False
-    power_jump = 20
-    gravity = 1
+    on_ground = False
+    power_jump = 150
+    gravity = 3
     coins = 0
     is_in_house = False
 
@@ -18,40 +18,62 @@ class Radish(pygame.sprite.Sprite):
             size[0] * pos[0] + 15, size[1] * pos[1] + 5)
 
     def walk(self, event):
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
-            self.rect.x -= self.speed
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
-            self.rect.x += self.speed
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
-            self.rect.y -= self.speed
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-            self.rect.y += self.speed
+        # сделать через флажки
+        if event.type == pygame.KEYDOWN and event.type != pygame.KEYUP:
+            if event.key == pygame.K_a:
+                self.rect.x -= self.speed
+            if event.key == pygame.K_d:
+                self.rect.x += self.speed
+            if event.key == pygame.K_SPACE:
+                self.jump()
 
-    def is_alive(self):
-        pass
-
-    def die(self):
-        pass
+        # if event.type == pygame.KEYUP:
+        #     pass
 
     def jump(self):
+        if self.on_ground:
+            self.rect.y -= self.power_jump
+
+
+    def pick_up_coins(self, группа_монет):  # ЯРИК СДЕЛАЙ!!
         pass
 
-    def stop_jump(self):
-        pass
-
-    def pick_up_coins(self, группа_монет):
-        pass
-
-    def go_in_house(self, группа_зданий):
-        pass
+    def go_in_house(self, control_point_group):
+        if pygame.sprite.spritecollideany(self, control_point_group):
+            return True
 
     def fall(self):
-        if pygame.sprite.spritecollideany(self, get_platform_group()) is None:
-            self.rect.y += self.gravity
+        self.rect.y += self.gravity
+        self.on_ground = False
+
+    def check_collide(self, platform_group, enemy_group):
+        platforms = pygame.sprite.spritecollide(self, platform_group, False)
+        if not platforms:
+            self.fall()
+        else:
+            for platform in platforms:
+                if self.rect.right + self.speed <= platform.rect.left:
+                    self.rect.right = platform.rect.left
+
+                if self.rect.left - self.speed >= platform.rect.right:
+                    self.rect.left = platform.rect.right
+
+                if self.rect.bottom - self.gravity <= platform.rect.top:
+                    self.rect.bottom = platform.rect.top + self.gravity
+                    self.on_ground = True
+
+                if self.rect.top + platform.rect.width // 2 >= platform.rect.bottom:
+                    self.rect.top = platform.rect.bottom
+
+
+        if pygame.sprite.spritecollideany(self, enemy_group):
+            self.kill()
+
 
     def update(self, *args):
         if args:
             self.walk(args[0])
+
 
 
 
@@ -67,5 +89,6 @@ class Grater(pygame.sprite.Sprite):
         self.rect.x += self.speed
 
     def update(self, *args):
-        self.run()
+        # self.run()
+        pass
 

@@ -46,7 +46,7 @@ class Level:
         # дополняем каждую строку пустыми клетками ('.')
         return list(map(lambda x: x.ljust(max_width, '.'), level_map))
 
-    def generate_level(self, tile_module, character_module, player_group, tile_group, platform_group, all_sprites):
+    def generate_level(self, tile_module, character_module, player_group, enemy_group, tile_group, platform_group, control_point_group, all_sprites):
         new_player, x, y = None, None, None
         for y in range(len(self.data_level)):
             for x in range(len(self.data_level[y])):
@@ -55,12 +55,12 @@ class Level:
 
                 elif self.data_level[y][x] == '+':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), tile_group, all_sprites)
-                    character_module.Grater(self.grater_image, (x, y), (50, 50), 1, player_group, all_sprites)
+                    character_module.Grater(self.grater_image, (x, y), (50, 50), 1, enemy_group, all_sprites)
                 elif self.data_level[y][x] == '@':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), tile_group, all_sprites)
-                    new_player = character_module.Radish(self.player_image, (x, y), (50, 50), 20, player_group, all_sprites)
+                    new_player = character_module.Radish(self.player_image, (x, y), (50, 50), 70, player_group, all_sprites)
                 elif self.data_level[y][x] == '/':
-                    tile_module.Tile(self.tile_images['house'], (x, y), (50, 50), platform_group, tile_group, all_sprites)
+                    tile_module.Tile(self.tile_images['house'], (x, y), (50, 50), control_point_group, tile_group, all_sprites)
 
         # вернем игрока, а также размер поля в клетках
         return new_player, x, y
