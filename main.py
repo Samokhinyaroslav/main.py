@@ -21,6 +21,7 @@ def game(screen, background_game_img):
         # обновляем положение всех спрайтов
         for sprite in all_sprites:
             camera.apply(sprite)
+        all_sprites.update()
 
         tiles_group.draw(screen)
         player_group.draw(screen)

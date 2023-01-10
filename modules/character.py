@@ -33,7 +33,9 @@ class Grater(pygame.sprite.Sprite):
         self.rect = self.image.get_rect().move(
             size[0] * pos[0] + 15, size[1] * pos[1] + 5)
 
-    def run(self, event):
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_f:
-            self.rect.x += self.speed
+    def run(self):
+        self.rect.x += self.speed
+
+    def update(self, *args):
+        self.run()
 

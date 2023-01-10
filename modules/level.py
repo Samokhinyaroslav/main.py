@@ -55,7 +55,7 @@ class Level:
 
                 elif self.data_level[y][x] == '+':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), empty_group, tile_group, all_sprites)
-                    grater = character_module.Grater(self.grater_image, (x, y), (50, 50), 10, player_group, all_sprites)
+                    character_module.Grater(self.grater_image, (x, y), (50, 50), 1, player_group, all_sprites)
                 elif self.data_level[y][x] == '@':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), empty_group, tile_group, all_sprites)
                     new_player = character_module.Radish(self.player_image, (x, y), (50, 50), 20, player_group, all_sprites)
@@ -69,17 +69,16 @@ class Camera:
     # зададим начальный сдвиг камеры
     def __init__(self):
         self.dx = 0
-        self.dy = 0
+
 
     # сдвинуть объект obj на смещение камеры
     def apply(self, obj):
         obj.rect.x += self.dx
-        obj.rect.y += self.dy
 
     # позиционировать камеру на объекте target
     def update(self, target, width, height):
         self.dx = -(target.rect.x + target.rect.w // 2 - width // 2)
-        self.dy = -(target.rect.y + target.rect.h // 2 - height // 2)
+
 
 
 
