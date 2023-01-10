@@ -1,5 +1,5 @@
 import pygame
-from .main import get_platform_group
+from main import get_platform_group
 
 
 class Radish(pygame.sprite.Sprite):
