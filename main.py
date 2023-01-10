@@ -1,7 +1,7 @@
 import pygame
-from level import *
-import character as character_module
-import tile as tile_module
+from modules.level import *
+import modules.character as character_module
+import modules.tile as tile_module
 
 def game(screen, background_game_img):
     # создадим группу, содержащую все спрайты
