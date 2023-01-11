@@ -3,7 +3,7 @@ import pygame_menu
 
 def create_theme_menu():
     myimage = pygame_menu.baseimage.BaseImage(
-        image_path="Foto/Prew2.jpg",
+        image_path="data/Prew2.jpg",
         drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
         drawing_offset=(0, 0)
     )

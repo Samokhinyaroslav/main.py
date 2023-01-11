@@ -1,8 +1,33 @@
 import pygame
+import pygame_menu
 from level import *
 import character as character_module
 import tile as tile_module
+import Menu as menu_module
 
+def create_theme_menu():
+    myimage = pygame_menu.baseimage.BaseImage(
+        image_path="data/image.png",
+        drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
+        drawing_offset=(0, 0)
+    )
+    mytheme = pygame_menu.Theme(background_color=myimage,
+                                      title_background_color=(255, 158, 158),
+                                      title_font_shadow=True,
+                                      widget_padding=27)
+    return mytheme
+
+
+def start_menu(screen, size_screen, theme_menu=None):
+    menu = pygame_menu.Menu(
+        height=size_screen[1],
+        theme=theme_menu,
+        title='Добро пожаловать',
+        width=size_screen[0]
+    )
+    menu.add.button("Начать игру", lambda: game(screen, background_game_img))
+    menu.add.button("Выход", pygame_menu.events.EXIT)
+    menu.mainloop(screen)
 
 
 def win(screen, background_game_img):
@@ -23,7 +48,7 @@ def game_over(screen, background_game_img):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
                 running = False
                 game()
-        screen.blit(background_game_img, (0, 0))
+        screen.blit(background_game_img, (12, 0))
         pygame.display.flip()
 
 
@@ -59,13 +84,15 @@ def game(screen, background_game_img):
         all_sprites.update()
 
 
+
         tiles_group.draw(screen)
         player_group.draw(screen)
         enemy_group.draw(screen)
         tick += 1
         clock.tick(FPS)
         pygame.display.flip()
-
+    pygame.quit()
+    sys.exit()
 
 if __name__ == '__main__':
     pygame.init()
@@ -81,6 +108,6 @@ if __name__ == '__main__':
     control_point_group = pygame.sprite.Group()
     player_group = pygame.sprite.Group()
     lvl = Level('data/lvl.txt')
-    player, level_x, level_y = lvl.generate_level(tile_module, character_module, player_group, enemy_group, tiles_group, platform_group, control_point_group, all_sprites)
+    player, level_x, level_y = lvl.generate_level(tile_module,  character_module, player_group, enemy_group, tiles_group, platform_group, control_point_group, all_sprites)
     camera = Camera()
-    game(screen, background_game_img)
+    start_menu(screen, size, create_theme_menu())
