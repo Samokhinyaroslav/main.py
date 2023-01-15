@@ -3,7 +3,19 @@ import pygame_menu
 from level import *
 import character as character_module
 import tile as tile_module
-import Menu as menu_module
+
+
+anim = [pygame.image.load('data/1.png'), ('data/2.png'), ('data/3.png'), ('data/4.png'), ('data/5.png'), ('data/6.png')]
+x = 50
+y = 41
+width = 305
+height = 305
+
+def drowWindow():
+    pygame.draw.rect(size, (0, 0, 255), (x, y, width, height))
+    pygame.display.update()
+    drowWindow()
+
 
 def create_theme_menu():
     myimage = pygame_menu.baseimage.BaseImage(
