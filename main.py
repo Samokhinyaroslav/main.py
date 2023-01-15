@@ -30,6 +30,12 @@ def start_menu(screen, size_screen, theme_menu=None):
     menu.mainloop(screen)
 
 
+def print_text(message, x, y, font_color = (0, 0, 0), font_type = 'data/PINGPONG.TTF', font_size=30):
+    font_type = pygame.font.Font(font_type, font_size)
+    text = font_type.render(message, True, font_color)
+    screen.blit(text, (x, y))
+
+
 def win(screen, background_game_img):
     running = True
     while running:
@@ -52,14 +58,12 @@ def game_over(screen, background_game_img):
         pygame.display.flip()
 
 
-
-
-
 def game(screen, background_game_img):
     # создадим группу, содержащую все спрайты
     FPS = 60
     tick = 0
     clock = pygame.time.Clock()
+    score = 0
     running = True
     while running:
         for event in pygame.event.get():
@@ -82,7 +86,16 @@ def game(screen, background_game_img):
             running = False
             win(screen, background_game_img)
         all_sprites.update()
+        print_text(("Score:" + str(score)), 560, 10)
 
+        # def count_scores(screen, ???):
+        #     global score
+        #
+        #     if # редиска каcается моентки:
+        #         score += 1
+        #     else:
+        #         score = score
+                ## Эту функцию скорее всего нужно перенести выше функции game, вместе с переменной score
 
 
         tiles_group.draw(screen)
