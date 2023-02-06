@@ -27,9 +27,6 @@ class Radish(pygame.sprite.Sprite):
             if event.key == pygame.K_SPACE:
                 self.jump()
 
-        # if event.type == pygame.KEYUP:
-        #     pass
-
     def jump(self):
         if self.on_ground:
             self.rect.y -= self.power_jump
@@ -89,6 +86,6 @@ class Grater(pygame.sprite.Sprite):
         self.rect.x += self.speed
 
     def update(self, *args):
-        # self.run()
-        pass
+        self.run()
+
 

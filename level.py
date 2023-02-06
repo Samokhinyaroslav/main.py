@@ -55,7 +55,7 @@ class Level:
 
                 elif self.data_level[y][x] == '+':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), tile_group, all_sprites)
-                    character_module.Grater(self.grater_image, (x, y), (50, 50), 1, enemy_group, all_sprites)
+                    character_module.Grater(self.grater_image, (x, y), (50, 50), 1.5, enemy_group, all_sprites)
                 elif self.data_level[y][x] == '@':
                     tile_module.Tile(self.tile_images['empty'], (x, y), (50, 50), tile_group, all_sprites)
                     new_player = character_module.Radish(self.player_image, (x, y), (50, 50), 70, player_group, all_sprites)
