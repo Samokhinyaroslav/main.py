@@ -36,13 +36,13 @@ def print_text(message, x, y, font_color = (0, 0, 0), font_type = 'data/PINGPONG
     screen.blit(text, (x, y))
 
 
-def win(screen, background_game_img):
+def win(screen, win_image):
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        screen.blit(background_game_img, (0, 0))
+        screen.blit(win_image, (0, 0))
         pygame.display.flip()
 
 def game_over(screen, background_game_img):
@@ -110,6 +110,7 @@ def game(screen, background_game_img):
 if __name__ == '__main__':
     pygame.init()
     background_game_img = pygame.image.load("data/background.png")
+    win_image = pygame.image.load('data/win.jpg')
     size = width, height = 700, 400
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()
